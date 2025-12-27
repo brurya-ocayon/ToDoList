@@ -1,0 +1,15 @@
+# Node
+node_modules/
+client/node_modules/
+ToDoListClient/**/node_modules/
+
+# Build
+dist/
+build/
+
+# .NET
+bin/
+obj/
+
+# Env
+.env

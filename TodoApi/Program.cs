@@ -14,11 +14,16 @@ builder.Services.AddCors(options =>
 });
 var connectionString = builder.Configuration.GetConnectionString("ToDoDB");
 
+// 2. הגדרה ידנית של הגרסה (מונע קריסה בשרת מרוחק)
+var serverVersion = new MySqlServerVersion(new Version(8, 0, 0)); 
+
 builder.Services.AddDbContext<ToDoDbContext>(options =>
-    options.UseMySql(
-        connectionString,
-        ServerVersion.AutoDetect(connectionString)
-    ));
+    options.UseMySql(connectionString, serverVersion));
+// builder.Services.AddDbContext<ToDoDbContext>(options =>
+//     options.UseMySql(
+//         connectionString,
+//         ServerVersion.AutoDetect(connectionString)
+//     ));
     
 // שירותים של Swagger
 builder.Services.AddEndpointsApiExplorer();
@@ -26,7 +31,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
 
 app.UseCors("AllowAll");

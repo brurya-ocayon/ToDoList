@@ -26,6 +26,9 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+app.UseHttpsRedirection();
+
+
 app.UseCors("AllowAll");
 
 // Swagger – רק ב־Development
